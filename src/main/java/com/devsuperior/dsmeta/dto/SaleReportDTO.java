@@ -6,10 +6,10 @@ import com.devsuperior.dsmeta.projections.SaleReportProjection;
 
 public class SaleReportDTO {
     
-    private Long id;
-    private LocalDate date;
-    private Double amount;
-    private String sellerName;
+    private final Long id;
+    private final LocalDate date;
+    private final Double amount;
+    private final String sellerName;
 
     public SaleReportDTO(Long id, LocalDate date, Double amount, String sellerName) {
         this.id = id;
