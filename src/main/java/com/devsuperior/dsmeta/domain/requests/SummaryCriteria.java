@@ -5,9 +5,7 @@ import java.time.LocalDate;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
-public class ReportCriteria {
-
-    private String name;
+public class SummaryCriteria {
 
     @DateTimeFormat(iso = ISO.DATE)
     private LocalDate maxDate;
@@ -15,17 +13,12 @@ public class ReportCriteria {
     @DateTimeFormat(iso = ISO.DATE)
     private LocalDate minDate;
 
-    public ReportCriteria() {
+    public SummaryCriteria() {
     }
 
-    public ReportCriteria(String name, LocalDate minDate, LocalDate maxDate) {
-        this.name = name;
-        this.maxDate = maxDate;
+    public SummaryCriteria(LocalDate minDate, LocalDate maxDate) {
         this.minDate = minDate;
-    }
-
-    public String getName() {
-        return name;
+        this.maxDate = maxDate;
     }
 
     public LocalDate getMaxDate() {
@@ -38,7 +31,7 @@ public class ReportCriteria {
 
     @Override
     public String toString() {
-        return "ReportCriteria [name=" + name + ", maxDate=" + maxDate + ", minDate=" + minDate + "]";
+        return "SummaryCriteria [maxDate=" + maxDate + ", minDate=" + minDate + "]";
     }
 
 }
