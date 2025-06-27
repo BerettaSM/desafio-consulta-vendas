@@ -20,9 +20,16 @@ public interface SaleRepository extends JpaRepository<Sale, Long> {
         FROM TB_SELLER AS seller
         JOIN TB_SALES AS sales
         ON seller.id = sales.seller_id
-        WHERE LOWER(seller.name) LIKE CONCAT('%', LOWER(:name), '%')
+        WHERE LOWER(seller.name) LIKE CONCAT('%', LOWER(:sellerName), '%')
+            AND sales.date BETWEEN :minDate AND :maxDate
+    """, countQuery = """
+        SELECT COUNT(*)
+        FROM TB_SELLER AS seller
+        JOIN TB_SALES AS sales
+        ON seller.id = sales.seller_id
+        WHERE LOWER(seller.name) LIKE CONCAT('%', LOWER(:sellerName), '%')
             AND sales.date BETWEEN :minDate AND :maxDate
     """)
-    Page<SaleReportProjection> searchByCriteria(String name, LocalDate minDate, LocalDate maxDate, Pageable pageable);
+    Page<SaleReportProjection> querySalesBy(String sellerName, LocalDate minDate, LocalDate maxDate, Pageable pageable);
 
 }

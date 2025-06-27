@@ -1,5 +1,8 @@
 package com.devsuperior.dsmeta.services;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,12 +28,11 @@ public class SaleService {
         return new SaleMinDTO(entity);
     }
 
-    public Page<SaleReportDTO> searchByCriteria(ReportCriteria criteria, Pageable pageable) {
-        return repository.searchByCriteria(
-                criteria.getName(),
-                criteria.getMinDate(),
-                criteria.getMaxDate(),
-                pageable)
+    public Page<SaleReportDTO> querySalesByCriteria(ReportCriteria criteria, Pageable pageable) {
+        String name = criteria.getName().orElse("");
+        LocalDate maxDate = criteria.getMaxDate().orElse(LocalDate.ofInstant(Instant.now(), ZoneId.systemDefault()));
+        LocalDate minDate = criteria.getMinDate().orElse(maxDate.minusYears(1L));
+        return repository.querySalesBy(name, minDate, maxDate, pageable)
             .map(SaleReportDTO::new);
     }
 

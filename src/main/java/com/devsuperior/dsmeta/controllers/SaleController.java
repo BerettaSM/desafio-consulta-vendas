@@ -29,7 +29,7 @@ public class SaleController {
 
     @GetMapping(value = "/report")
     public ResponseEntity<Page<SaleReportDTO>> getReport(ReportCriteria criteria, Pageable pageable) {
-        Page<SaleReportDTO> page = service.searchByCriteria(criteria, pageable);
+        Page<SaleReportDTO> page = service.querySalesByCriteria(criteria, pageable);
         return ResponseEntity.ok(page);
     }
 
